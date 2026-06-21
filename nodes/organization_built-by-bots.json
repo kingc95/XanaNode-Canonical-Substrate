@@ -1,0 +1,9 @@
+{
+  "id": "xananode.canonical:organization/built-by-bots",
+  "title": "Built By Bots",
+  "type": "organization",
+  "subtype": "company",
+  "importance": 4,
+  "summary": "The authoring and project identity associated with XanaNode development and media attribution.",
+  "relationships": []
+}

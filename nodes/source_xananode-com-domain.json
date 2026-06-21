@@ -1,0 +1,14 @@
+{
+  "id": "xananode.canonical:source/xananode-com-domain",
+  "title": "XanaNode.com",
+  "type": "source",
+  "subtypes": [
+    "website",
+    "official_site"
+  ],
+  "importance": 5,
+  "summary": "The primary public home for the personally authored canonical XanaNode substrate.",
+  "source_url": "https://xananode.com/",
+  "rights_status": "canonical-public",
+  "relationships": []
+}
