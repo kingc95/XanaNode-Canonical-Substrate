@@ -315,10 +315,10 @@
     },
     {
       "id": "xananode.canonical:rel/built-by-bots-created-icon",
-      "source": "xananode.canonical:organization/built-by-bots",
+      "source": "xananode.canonical:person/christian-siefen",
       "target": "xananode.canonical:media/xananode-icon",
       "type": "created",
-      "summary": "Built By Bots created the XanaNode icon asset.",
+      "summary": "Christian Siefen created the XanaNode icon asset.",
       "weight": 4,
       "visibility": "secondary",
       "asserted_at": "2026-06-19T00:00:00.000Z"
@@ -3884,6 +3884,16 @@
       "asserted_at": "2026-06-19T00:00:00.000Z"
     },
     {
+      "id": "xananode.canonical:rel/question-who-made-xananode-documents-organization-built-by-bots-faq-2",
+      "source": "xananode.canonical:question/who-made-xananode",
+      "target": "xananode.canonical:organization/built-by-bots",
+      "type": "documents",
+      "summary": "Built By Bots remains in the canonical substrate as historical lineage context, not as the current public identity of XanaNode.",
+      "weight": 4,
+      "visibility": "secondary",
+      "asserted_at": "2026-06-19T00:00:00.000Z"
+    },
+    {
       "id": "xananode.canonical:rel/question-who-made-xananode-documents-person-christian-siefen-faq-1",
       "source": "xananode.canonical:question/who-made-xananode",
       "target": "xananode.canonical:person/christian-siefen",
@@ -3899,16 +3909,6 @@
       "target": "xananode.canonical:concept/xananode",
       "type": "explains",
       "summary": "The FAQ question is about XanaNode authorship.",
-      "weight": 4,
-      "visibility": "secondary",
-      "asserted_at": "2026-06-19T00:00:00.000Z"
-    },
-    {
-      "id": "xananode.canonical:rel/question-who-made-xananode-uses-organization-built-by-bots-faq-2",
-      "source": "xananode.canonical:question/who-made-xananode",
-      "target": "xananode.canonical:organization/built-by-bots",
-      "type": "uses",
-      "summary": "Built By Bots is the project organization represented in the canonical substrate.",
       "weight": 4,
       "visibility": "secondary",
       "asserted_at": "2026-06-19T00:00:00.000Z"

@@ -33,7 +33,7 @@
     },
     {
       "id": "xananode.lineage",
-      "name": "XanaNode Lost Lineage Pack",
+      "name": "XanaNode Lost Lineage Substrate",
       "namespace": "xananode.lineage",
       "description": "A lineage substrate for the historical and conceptual path into XanaNode.",
       "status": "community",

@@ -12,7 +12,7 @@ A substrate includes:
 - schema declarations
 - optional custom extensions
 - optional merge reports
-- optional substrate packs
+- optional mounted or imported substrate layers
 
 ## Standard Layout
 
@@ -70,20 +70,24 @@ Each production substrate is a Git repository. Git provides the substrate's vers
 XanaNode does not replace Git. It defines knowledge-specific artifacts inside a repository:
 
 - `substrate.json`
+- `nodes-index.json`
 - `relationships.json`
 - `nodes/*.json`
 - optional `schemas/*.json`
 - optional merge and compatibility reports
 
+For static-host discovery, a substrate should also expose a machine front door such as `/.well-known/xananode`, plus ordinary crawl hints like `robots.txt` and head links that point to the protocol artifacts. The human viewer may live at the root, but the machine handshake should make the substrate obvious without scraping page prose or client-side graph code.
+
 The substrate manifest must include a `repository` block describing the Git remote and default branch. Example fixtures may live in subdirectories of the protocol repository, but independently maintained substrates should use the repository root as the substrate root.
 
 Substrates are sovereign. They can be moderated independently while still participating in federation.
 
-## Substrate Packs
+## Portable Substrates And Composition
 
-A substrate pack is a portable set of XanaNode protocol artifacts that can be added to a substrate without losing the ownership boundary of the pack.
+In current XanaNode language, the substrate is the primary unit. A `.substrate` file is a portable bundled substrate for transmission or release. This specification still uses `pack` in a few field names and compatibility notes because older tools shipped that wording first, but official user-facing tools should teach substrate, `.substrate`, mount, import, merge, and Intertwingle.
+A portable substrate is a set of XanaNode protocol artifacts that can be added to another substrate without losing the ownership boundary of the source substrate.
 
-Packs use the same artifact shapes as a normal substrate:
+Portable substrates use the same artifact shapes as a normal substrate:
 
 - optional `substrate.json`
 - `nodes/*.json` or any JSON file containing one node, an array of nodes, or `{ "nodes": [...] }`
@@ -91,17 +95,17 @@ Packs use the same artifact shapes as a normal substrate:
 - optional `assets/` files referenced by media node `asset_path` fields
 - optional schemas, reports, and companion metadata
 
-Packs may be used in three composition modes:
+Portable substrates may be used in three composition modes:
 
-- `mounted`: the pack is included at build or analysis time, but remains externally governed. Its records are not copied into the receiving substrate as canonical local content.
-- `imported`: the pack's records are copied into generated local artifacts with provenance, but identity is not reconciled beyond explicit namespace mappings. Imported records must retain `imported_from`, pack identity, and pack mode metadata.
-- `merged`: the pack is reconciled with the receiving substrate through identity mapping, duplicate detection, conflict handling, and review policy. Merged packs should produce a merge or intake report.
+- `mounted`: the incoming substrate is included at build or analysis time, but remains externally governed. Its records are not copied into the receiving substrate as canonical local content.
+- `imported`: the incoming substrate's records are copied into generated local artifacts with provenance, but identity is not reconciled beyond explicit namespace mappings. Imported records must retain `imported_from`, substrate identity, and composition mode metadata.
+- `merged`: the incoming substrate is reconciled with the receiving substrate through identity mapping, duplicate detection, conflict handling, and review policy. Merged substrates should produce a merge or intake report.
 
-Mounted packs are the right model for optional example layers, teaching material, lineage overlays, alternate interpretations, and domain extensions. Imported packs are the right model when a substrate owner wants local generated artifacts for an external pack without claiming authorship. Merged packs are the right model when a substrate owner decides that incoming records should be reconciled with local canonical authorship.
+Mounted substrates are the right model for optional example layers, lineage overlays, alternate interpretations, and domain extensions. Imported substrates are the right model when a substrate owner wants local generated artifacts for an external substrate without claiming authorship. Merged substrates are the right model when a substrate owner decides that incoming records should be reconciled with local canonical authorship.
 
 `absorbed` is a legacy alias for `imported`. New manifests should prefer `imported` or `merged` so tools can distinguish copying from identity reconciliation.
 
-The substrate manifest may declare pack references in `imports`:
+The substrate manifest may declare substrate references in `imports`:
 
 ```json
 {
@@ -118,11 +122,11 @@ The substrate manifest may declare pack references in `imports`:
 }
 ```
 
-String imports remain valid for simple vocabulary or schema dependencies. Object imports are used when the import is a concrete substrate pack.
+String imports remain valid for simple vocabulary or schema dependencies. Object imports are used when the import is a concrete substrate source.
 
 The field name is `imports` for manifest compatibility, but user interfaces may describe these records as mounted substrates, federation sources, or substrate mounts. The important distinction is governance: a mounted substrate remains someone else's authored source unless an explicit import or merge step changes that status.
 
-Pack ingress may declare namespace mappings:
+Substrate ingress may declare namespace mappings:
 
 ```json
 {
@@ -140,28 +144,28 @@ Pack ingress may declare namespace mappings:
 }
 ```
 
-Namespace mappings are local federation rules. They do not rename the imported pack's own nodes unless `scope` is `all`; with `scope: "relationships"` they only rebase relationship endpoints so mounted records can connect to equivalent local substrate nodes. Implementations should report mappings in review or merge/intake output so authors can audit how a mounted pack is being interpreted.
+Namespace mappings are local federation rules. They do not rename the imported substrate's own nodes unless `scope` is `all`; with `scope: "relationships"` they only rebase relationship endpoints so mounted records can connect to equivalent local substrate nodes. Implementations should report mappings in review or merge/intake output so authors can audit how a mounted substrate is being interpreted.
 
-Implementations must not silently treat a mounted pack as imported or merged. If a tool copies mounted records into local artifacts, it should record that as an explicit import step with review metadata. If a tool reconciles identity, de-duplicates nodes, or resolves conflicting claims, it should record that as a merge step. This prevents two repositories from accidentally claiming canonical ownership of the same governed records.
+Implementations must not silently treat a mounted substrate as imported or merged. If a tool copies mounted records into local artifacts, it should record that as an explicit import step with review metadata. If a tool reconciles identity, de-duplicates nodes, or resolves conflicting claims, it should record that as a merge step. This prevents two repositories from accidentally claiming canonical ownership of the same governed records.
 
 When a substrate is cloned from an online federation target, the mounted name must include the Git branch and commit that were actually used, such as `Example Substrate (main@1a2b3c4d5e6f)`. Branch plus commit is the concrete version. A branch name alone is not enough provenance because the branch can move.
 
-## Pack Media Portability
+## Substrate Media Portability
 
-Packs that include local media must include the media files alongside the node records. Media files belong under the pack root, normally in `assets/`. Media nodes reference those files with relative `asset_path` values.
+Portable substrates that include local media must include the media files alongside the node records. Media files belong under the substrate root, normally in `assets/`. Media nodes reference those files with relative `asset_path` values.
 
-Pack builders must:
+Substrate builders must:
 
 - copy every file referenced by a media node `asset_path`
 - copy authored local substrate files that the substrate carries as evidence or media, including images, PDFs, audio, video, diagrams, source snapshots, and other digital files unless sharing policy excludes them
-- reject or warn on paths that escape the pack root
+- reject or warn on paths that escape the substrate root
 - preserve `source_url`, `rights_status`, `license`, `source_snapshot`, and content identifiers when known
 - keep `primary_media` references pointing at media node ids, not raw file paths
-- include projection media assets referenced by node type, subtype, relationship type, and relationship category registries when the pack claims to carry those registries
+- include projection media assets referenced by node type, subtype, relationship type, and relationship category registries when the substrate claims to carry those registries
 - report duplicate local files by content hash so authors can see when the same literal file has propagated through multiple substrates
 - report path conflicts when two different files claim the same relative `asset_path`
 
-Pack consumers must resolve `asset_path` relative to the pack root for mounted packs and relative to the receiving substrate root for imported or merged assets after an explicit copy step.
+Substrate consumers must resolve `asset_path` relative to the source substrate root for mounted substrates and relative to the receiving substrate root for imported or merged assets after an explicit copy step.
 
 Live source URLs and captured media are different objects. A `source` node may point to `https://example.com`. A related `media` node with `subtype: "web_snapshot"` may carry a screenshot or Open Graph image captured from that URL. This lets renderers show rich previews while preserving source identity, capture time, rights, and provenance.
 

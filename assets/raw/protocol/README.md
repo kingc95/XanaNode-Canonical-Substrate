@@ -281,6 +281,50 @@ npm test
 
 ---
 
+## How The Stack Fits Together
+
+XanaNode is designed so the same substrate can move through the whole stack without being reinvented at each layer.
+
+```text
+Protocol defines the rules
+Core reads, validates, analyzes, and exports substrates
+Workspace manages substrate folders, registry targets, working copies, and .substrate bundles
+Studio uses Workspace/Core for authoring and federation UX
+Hugo uses Core to validate and mount substrate sources, then projects them as a static site
+```
+
+Once you are past Core, the thing is still a substrate. Sometimes it is a Git-backed substrate folder. Sometimes it is a portable `.substrate` bundle. Sometimes it is a mounted registry target cloned locally. These are transport and governance forms of the same thing, not separate knowledge objects.
+
+The protocol registry can list known federation targets. Official tools should prefer that registry when offering online substrate choices, while still allowing federation with valid external substrates that are not yet listed there.
+
+## FAQ
+
+### Is this a real working stack?
+
+Yes. XanaNode is not just a schema set. The protocol, Core SDK, Workspace engine, Studio authoring tool, Hugo projection layer, and canonical XanaNode substrate are meant to run together right now.
+
+### What is a `.substrate` file?
+
+A `.substrate` file is a portable bundled substrate. It can carry the manifest, nodes, relationships, media, source snapshots, schemas, and supporting metadata needed to move a substrate between tools without losing pieces.
+
+### Is a `.substrate` different from a substrate folder?
+
+No. It is the same substrate in a packaged transmission form. A Git-backed folder is better for active authorship and history. A `.substrate` bundle is better for shipping, handoff, offline import, and archival release.
+
+### Where does federation happen?
+
+Federation begins at the protocol level and is enforced through Core. Workspace is the management layer that should clone, mount, compare, import, or merge external substrates. Studio is the human-facing authoring interface for that workflow. Hugo is a projection layer that can mount configured substrate sources at build time and render the result.
+
+### Do I have to rewrite imported substrate data as Markdown for Hugo?
+
+No. Markdown is an authoring convenience, not the only source form. Hugo should be able to mount or import validated substrate JSON through Core and render it directly.
+
+### Can substrates overlap?
+
+Yes. Overlap is expected. Independent substrates may describe the same people, organizations, concepts, or works differently. XanaNode is meant to preserve that overlap, carry the provenance, and let tools surface the comparison instead of flattening it away.
+
+---
+
 ## Extension Schema
 
 Substrates may define custom node types and relationship types.

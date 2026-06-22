@@ -1726,7 +1726,7 @@
       "node": "xananode.canonical:schema/protocol-artifact-examples-minimal-substrate-nodes-media-xananode-icon.json",
       "source": "examples/minimal-substrate/nodes/media-xananode-icon.json",
       "asset_path": "assets/raw/protocol/examples/minimal-substrate/nodes/media-xananode-icon.json",
-      "content_id": "sha256:1c2fe98217121fba87b290567625828ed483edc5e5158159b5138e6f1cd709a0"
+      "content_id": "sha256:dd583068751b1a3cf9dfed12fbd81a8878ba05c1aa87caf69e261e3aa8b9a1e0"
     },
     {
       "node": "xananode.canonical:schema/protocol-artifact-examples-minimal-substrate-nodes-person-example-maintainer.json",
@@ -1798,7 +1798,7 @@
       "node": "xananode.canonical:schema/protocol-artifact-registry-federation-targets.json",
       "source": "registry/federation-targets.json",
       "asset_path": "assets/raw/protocol/registry/federation-targets.json",
-      "content_id": "sha256:3ac90a9afcfafb3e6b6bc447040ada8da71eeb883b4adeb6063627d2cea0d623"
+      "content_id": "sha256:47588339d23c94870e505c11d9ca57388ba0e87c0ee318e8001d6ec403317795"
     },
     {
       "node": "xananode.canonical:schema/protocol-artifact-registry-federation-targets.schema.json",
@@ -2152,7 +2152,7 @@
       "node": "xananode.canonical:source/protocol-artifact-readme.md",
       "source": "README.md",
       "asset_path": "assets/raw/protocol/README.md",
-      "content_id": "sha256:f098ae56c4c3b8a81bb8c32c54c91b31d2daa5de9ff9eae1bb305a6663c7427d"
+      "content_id": "sha256:57ed7b2281714e35b301e5766a07993815fb00776981fa4e05abd52cfb34797f"
     },
     {
       "node": "xananode.canonical:source/protocol-artifact-registry-readme.md",
@@ -2230,7 +2230,7 @@
       "node": "xananode.canonical:source/protocol-artifact-specs-substrates.md",
       "source": "specs/substrates.md",
       "asset_path": "assets/raw/protocol/specs/substrates.md",
-      "content_id": "sha256:bd7d3ad22ad8554a7033d1a123af3e22488c63d922e1c96de26e518875c9c720"
+      "content_id": "sha256:4ca150a762846959669526ec851aa3c4a639cab54f9e642e7f495f01db0b33e4"
     },
     {
       "node": "xananode.canonical:source/protocol-artifact-specs-transclusion.md",
@@ -2460,7 +2460,7 @@
     {
       "source": "examples/minimal-substrate/nodes/media-xananode-icon.json",
       "asset_path": "assets/raw/protocol/examples/minimal-substrate/nodes/media-xananode-icon.json",
-      "content_id": "sha256:1c2fe98217121fba87b290567625828ed483edc5e5158159b5138e6f1cd709a0"
+      "content_id": "sha256:dd583068751b1a3cf9dfed12fbd81a8878ba05c1aa87caf69e261e3aa8b9a1e0"
     },
     {
       "source": "examples/minimal-substrate/nodes/person-example-maintainer.json",
@@ -3665,7 +3665,7 @@
     {
       "source": "README.md",
       "asset_path": "assets/raw/protocol/README.md",
-      "content_id": "sha256:f098ae56c4c3b8a81bb8c32c54c91b31d2daa5de9ff9eae1bb305a6663c7427d"
+      "content_id": "sha256:57ed7b2281714e35b301e5766a07993815fb00776981fa4e05abd52cfb34797f"
     },
     {
       "source": "registry/canonical-schemas.json",
@@ -3675,7 +3675,7 @@
     {
       "source": "registry/federation-targets.json",
       "asset_path": "assets/raw/protocol/registry/federation-targets.json",
-      "content_id": "sha256:3ac90a9afcfafb3e6b6bc447040ada8da71eeb883b4adeb6063627d2cea0d623"
+      "content_id": "sha256:47588339d23c94870e505c11d9ca57388ba0e87c0ee318e8001d6ec403317795"
     },
     {
       "source": "registry/federation-targets.schema.json",
@@ -3845,7 +3845,7 @@
     {
       "source": "specs/substrates.md",
       "asset_path": "assets/raw/protocol/specs/substrates.md",
-      "content_id": "sha256:bd7d3ad22ad8554a7033d1a123af3e22488c63d922e1c96de26e518875c9c720"
+      "content_id": "sha256:4ca150a762846959669526ec851aa3c4a639cab54f9e642e7f495f01db0b33e4"
     },
     {
       "source": "specs/transclusion.md",
@@ -4858,13 +4858,13 @@
   "source_assets": [],
   "duplicate_assets": [],
   "asset_conflicts": [],
-  "generated_at": "2026-06-21T03:46:17.547Z",
+  "generated_at": "2026-06-22T07:39:41.439Z",
   "build_metadata": {
     "version": "0.1.0",
     "git_commit": "",
     "git_branch": "",
     "repository": "kingc95/XanaNode-Core-SDK",
-    "generated_at": "2026-06-21T03:46:17.547Z",
+    "generated_at": "2026-06-22T07:39:41.439Z",
     "built_by": "@xananode/core",
     "runtime": "node v24.16.0",
     "platform": "win32/x64",
