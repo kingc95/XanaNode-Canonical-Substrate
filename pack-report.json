@@ -2,8 +2,8 @@
   "id": "xananode.canonical",
   "namespace": "xananode.canonical",
   "sources": [],
-  "nodes": 1054,
-  "relationships": 2222,
+  "nodes": 1062,
+  "relationships": 2243,
   "warnings": [
     {
       "kind": "duplicate_node_id",
@@ -4894,13 +4894,13 @@
   "source_assets": [],
   "duplicate_assets": [],
   "asset_conflicts": [],
-  "generated_at": "2026-06-22T10:18:25.341Z",
+  "generated_at": "2026-06-22T10:33:26.721Z",
   "build_metadata": {
     "version": "0.1.0",
     "git_commit": "",
     "git_branch": "",
     "repository": "kingc95/XanaNode-Core-SDK",
-    "generated_at": "2026-06-22T10:18:25.341Z",
+    "generated_at": "2026-06-22T10:33:26.721Z",
     "built_by": "@xananode/core",
     "runtime": "node v24.16.0",
     "platform": "win32/x64",
