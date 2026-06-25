@@ -22,6 +22,8 @@ XanaNode is designed to be both human-readable and machine-interpretable.
 
 XanaNode is also a working software stack. The protocol, Core SDK, Workspace engine, Studio workbench, Mobile capture companion, Hugo projection layer, and canonical XanaNode.com substrate are designed to run together and to describe themselves as XanaNode data. The canonical substrate is not only documentation about the project; it is a living example of the protocol carrying its own schemas, registries, media assets, source snapshots, project history, implementation links, build metadata, governance notes, and unresolved work.
 
+This repository now also publishes an explicit substrate source at `substrate-source/`. That folder is generated from the protocol repository itself so the rest of the stack can federate with the protocol as a normal substrate instead of treating this repository as a private implementation detail.
+
 That recursive quality is intentional. If XanaNode says relationships preserve knowledge, the XanaNode project itself must preserve the relationships that explain XanaNode: why files exist, where schemas came from, which tools consume them, what changed, what is pending, and how the public website was produced.
 
 Documentation is licensed under `CC-BY-4.0`. Schemas, validators, and reference code are licensed under `Apache-2.0`. The XanaNode name and logo are trademarks of the XanaNode project; see [LICENSE.md](LICENSE.md) and [TRADEMARK.md](TRADEMARK.md).
@@ -309,6 +311,20 @@ Hugo uses Core to validate and mount substrate sources, then projects them as a 
 Once you are past Core, the thing is still a substrate. Sometimes it is a Git-backed substrate folder. Sometimes it is a portable `.substrate` bundle. Sometimes it is a mounted registry target cloned locally. These are transport and governance forms of the same thing, not separate knowledge objects.
 
 The protocol registry can list known federation targets. Official tools should prefer that registry when offering online substrate choices, while still allowing federation with valid external substrates that are not yet listed there.
+
+To regenerate the Protocol repo's own substrate source:
+
+```powershell
+node tools/build-substrate-source.mjs
+```
+
+Or from the `XanaNode-Master` workspace root:
+
+```powershell
+npm run protocol:build-substrate-source
+```
+
+The protocol itself is not tied to Node.js. The current reference stack happens to be Node-based, but the protocol-facing contract should be callable from any stack. Official tooling should converge on stable `xananode-core` and `xananode-workspace` executable interfaces so Studio, Mobile, Hugo helpers, AI agents, and future third-party tools can operate on substrates without embedding one implementation language directly. See [specs/substrates.md](specs/substrates.md) and [proposals/XNP-0012-executable-tool-contract.md](proposals/XNP-0012-executable-tool-contract.md).
 
 ## FAQ
 

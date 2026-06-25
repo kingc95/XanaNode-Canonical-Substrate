@@ -1957,6 +1957,29 @@
       }
     },
     {
+      "type": "questions",
+      "label": "Questions",
+      "category": "inquiry",
+      "meaning": "The source questions, challenges, or casts doubt on the target claim, hypothesis, answer, method, or interpretation.",
+      "inverse": "questioned_by",
+      "default_weight": 3,
+      "default_visibility": "secondary",
+      "namespace": "xananode",
+      "id": "xananode:questions",
+      "core": true,
+      "extends": null,
+      "color": "#2dd4bf",
+      "inverse_color": "#99f6e4",
+      "line_style": "dashed",
+      "inverse_line_style": "solid",
+      "projection": {
+        "icon": "questions",
+        "icon_label": "->",
+        "asset_path": "assets/projection/relationship-types/questions.svg",
+        "category_asset_path": "assets/projection/relationship-categories/inquiry.svg"
+      }
+    },
+    {
       "type": "participated_in",
       "label": "Participated in",
       "category": "participation",
@@ -2275,6 +2298,29 @@
         "icon": "replied_to",
         "icon_label": "->",
         "asset_path": "assets/projection/relationship-types/replied_to.svg",
+        "category_asset_path": "assets/projection/relationship-categories/communication.svg"
+      }
+    },
+    {
+      "type": "responds_to",
+      "label": "Responds to",
+      "category": "communication",
+      "meaning": "The source responds to the target communication, question, claim, observation, or prior response.",
+      "inverse": "responded_to_by",
+      "default_weight": 4,
+      "default_visibility": "primary",
+      "namespace": "xananode",
+      "id": "xananode:responds_to",
+      "core": true,
+      "extends": null,
+      "color": "#38bdf8",
+      "inverse_color": "#bae6fd",
+      "line_style": "solid",
+      "inverse_line_style": "dashed",
+      "projection": {
+        "icon": "responds_to",
+        "icon_label": "->",
+        "asset_path": "assets/projection/relationship-types/responds_to.svg",
         "category_asset_path": "assets/projection/relationship-categories/communication.svg"
       }
     },

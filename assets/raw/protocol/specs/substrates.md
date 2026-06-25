@@ -188,6 +188,106 @@ Mounted substrate records should preserve:
 - namespace
 - mounted/imported/merged/absorbed mode
 
+## Executable Tool Contract
+
+The protocol does not require Node.js, Python, or any other language runtime. Those are implementation choices, not protocol rules.
+
+Official XanaNode tooling should converge on two boring machine entry points that other applications can call regardless of stack:
+
+- `xananode-core`
+- `xananode-workspace`
+
+These may be delivered as native executables, self-contained packaged binaries, platform launchers, or language-specific wrappers, but the command contract should remain stable across forms.
+
+The intent is simple:
+
+- Core handles protocol reading, validation, analysis, fragment generation, bundle writing, and projection-ready graph derivation.
+- Workspace handles substrate folder lifecycle, authoring roots, imports, working copies, federation intake, archive packaging, and build orchestration.
+
+Applications such as Studio, Mobile, Hugo helpers, AI agents, browser services, and third-party integrations should be able to call those tools without embedding the implementation language directly.
+
+### Required executable behavior
+
+Official executable implementations should:
+
+- accept ordinary filesystem paths to substrate folders, `.substrate` archives, `substrate-bundle.json`, and `substrate-bundle.jsonl`
+- return structured machine-readable output through JSON on stdout, JSON files on disk, or both
+- return non-zero exit codes on validation, parse, or runtime failure
+- preserve protocol semantics regardless of host language
+- expose build metadata such as version, commit, build date, and implementation identity
+- keep command names and output envelopes stable enough that one tool can replace another implementation without rewriting the whole caller
+
+### Recommended Core commands
+
+The stable Core surface should include commands equivalent to:
+
+- `xananode-core validate`
+- `xananode-core inspect`
+- `xananode-core build`
+- `xananode-core bundle`
+- `xananode-core analyze-intake`
+- `xananode-core projection`
+
+Expected responsibilities:
+
+- `validate`: schema and integrity validation without mutating source records
+- `inspect`: summarize a substrate or portable substrate source
+- `build`: emit split protocol artifacts and optional bundle variants
+- `bundle`: emit a portable `.substrate` archive plus optional JSON and JSONL companions
+- `analyze-intake`: evaluate an incoming substrate against a receiving substrate for merge candidates, conflicts, suggested links, suggested transclusions, duplicate files, and health signals
+- `projection`: derive renderer-neutral graph/projection data from protocol artifacts
+
+### Recommended Workspace commands
+
+The stable Workspace surface should include commands equivalent to:
+
+- `xananode-workspace init`
+- `xananode-workspace open`
+- `xananode-workspace build`
+- `xananode-workspace export`
+- `xananode-workspace intertwingle`
+- `xananode-workspace deintertwingle`
+- `xananode-workspace health`
+- `xananode-workspace snapshot`
+
+Expected responsibilities:
+
+- `init`: create a compliant substrate folder with declared authorship and repository metadata
+- `open`: open an existing local substrate folder or working copy
+- `build`: orchestrate Core builds for the active workspace
+- `export`: write `.substrate`, `substrate-bundle.json`, `substrate-bundle.jsonl`, and split artifact outputs from the same source substrate
+- `intertwingle`: mount or clone another substrate into a local workspace without silently claiming ownership
+- `deintertwingle`: remove mounted material that has not been explicitly merged, while warning about broken chains or lost references
+- `health`: compute substrate health, intake reports, chain break warnings, summary/body duplication warnings, and other authoring signals
+- `snapshot`: create a versioned workspace snapshot through the substrate's backing VCS
+
+### JSON-first machine I/O
+
+For interoperability, executable implementations should support JSON-first invocation patterns.
+
+Examples:
+
+- pass arguments by filesystem path and flags
+- optionally accept JSON request files or stdin envelopes
+- write JSON result envelopes to stdout when `--json` is requested
+
+The exact envelope format may evolve, but official tools should preserve these principles:
+
+- callers should not scrape prose output
+- success and failure should be obvious without reading human narration
+- structured warnings should be distinguishable from fatal errors
+- file outputs should be declared in the response
+
+### Relationship to language-specific packages
+
+JavaScript, Python, Rust, Go, Java, Kotlin, or other language packages may still exist as implementation surfaces. That is fine.
+
+But the protocol-facing contract should be the executable behavior and the artifact formats, not a requirement that every downstream caller embed Node.js APIs directly.
+
+In other words: the substrate is the protocol object, and the executable contract is the boring transport layer that lets many tools participate without sharing one language runtime.
+
+The current reference stack now supports Windows launcher packaging for `xananode-core` and `xananode-workspace` as self-contained executables with sibling runtime trees. That packaging shape is still an implementation detail, but it proves the protocol boundary can be used without a separate Node install on the calling machine.
+
 ## Federation Targets
 
 The protocol registry may list known online federation targets. A federation target is a Git-backed substrate source that tools can discover, clone, validate, and mount into a local workspace.
